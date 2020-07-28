@@ -1,0 +1,114 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "title": "SQS Event",
+  "description": "Events from Amazon SQS. See https://docs.aws.amazon.com/lambda/latest/dg/with-sqs.html for more information.",
+  "type": "object",
+  "required": ["Records"],
+  "properties": {
+    "Records": {
+      "type": "array",
+      "title": "SQS messages",
+      "description": "Array of Amazon SQS messages.",
+      "items": {
+        "type": "object",
+        "title": "SQS Message",
+        "required": [
+          "messageId", "receiptHandle", "body", "attributes", "messageAttributes",
+          "md5OfBody", "eventSource", "eventSourceARN", "awsRegion"
+        ],
+        "properties": {
+          "messageId": {
+            "type": "string",
+            "description": "A unique identifier for the message. A MessageIdis considered unique across all AWS accounts for an extended period of time.",
+            "example": "059f36b4-87a3-44ab-83d2-661975830a7d"
+          },
+          "receiptHandle": {
+            "type": "string",
+            "description": "An identifier associated with the act of receiving the message. A new receipt handle is returned every time you receive a message. When deleting a message, you provide the last received receipt handle to delete the message.",
+            "example": "AQEBwJnKyrHigUMZj6rYigCgxlaS3SLy0a..."
+          },
+          "body": {
+            "type": "string",
+            "description": "The message's contents (not URL-encoded).",
+            "example": "Test message."
+          },
+          "attributes": {
+            "type": "object",
+            "required": ["ApproximateReceiveCount", "SentTimestamp", "SenderId", "ApproximateFirstReceiveTimestamp"],
+            "properties": {
+              "ApproximateReceiveCount": {
+                "type": "string",
+                "description": "Number of times a message has been received across all queues but not deleted.",
+                "example": "1"
+              },
+              "SentTimestamp": {
+                "type": "string",
+                "description": "The time the message was sent to the queue (epoch time in milliseconds).",
+                "example": "1545082649183"
+              },
+              "SenderId": {
+                "type": "string",
+                "description": "For an IAM user, returns the IAM user ID. For an IAM role, returns the IAM role ID. See https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html#identifiers-unique-ids for more information.",
+                "example": "AIDAIENQZJOLO23YVJ4VO"
+              },
+              "ApproximateFirstReceiveTimestamp": {
+                "type": "string",
+                "description": "The time the message was first received from the queue (epoch time in milliseconds).",
+                "example": "1545082649185"
+              },
+              "SequenceNumber": {
+                "type": "string",
+                "description": "Sequence number for SQS FIFO queues. See https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queues.html for more information.",
+                "example": "18849496460467696128"
+              },
+              "MessageGroupId": {
+                "type": "string",
+                "description": "Message group ID for SQS FIFO queues. See https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queues.html for more information.",
+                "example": "1"
+              },
+              "MessageDeduplicationId": {
+                "type": "string",
+                "description": "Message deduplication ID for SQS FIFO queues. See https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queues.html for more information.",
+                "example": "1"
+              }
+            }
+          },
+          "messageAttributes": {
+            "type": "object",
+            "description": "SQS message metadata. Each message attribute consists of a Name, Type, and Value. See https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-message-metadata.html for more information.",
+            "additionalProperties": {
+              "type": "object",
+              "properties": {
+                "Type": {
+                  "type": "string",
+                  "example": "String"
+                },
+                "Value": {
+                  "type": "string",
+                  "example": "TestString"
+                }
+              }
+            }
+          },
+          "md5OfBody": {
+            "type": "string",
+            "description": "An MD5 digest of the non-URL-encoded message body string.",
+            "example": "e4e68fb7bd0e697a0ae8f1bb342846b3"
+          },
+          "eventSource": {
+            "type": "string",
+            "example": "aws:sqs"
+          },
+          "eventSourceARN": {
+            "type": "string",
+            "example": "arn:aws:sqs:us-east-2:123456789012:my-queue"
+          },
+          "awsRegion": {
+            "type": "string",
+            "example": "us-east-2"
+          }
+        }
+      }
+    }
+  }
+}

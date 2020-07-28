@@ -1,0 +1,111 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "title": "SNS Event",
+  "description": "Events from Amazon SNS. See https://docs.aws.amazon.com/lambda/latest/dg/with-sns.html for more information.",
+  "type": "object",
+  "required": ["Records"],
+  "properties": {
+    "Records": {
+      "type": "array",
+      "title": "SNS messages",
+      "description": "Array of Amazon SNS messages",
+      "items": {
+        "type": "object",
+        "title": "SNS Message",
+        "required": [
+          "EventVersion", "EventSubscriptionArn", "EventSource", "Sns"
+        ],
+        "properties": {
+          "EventVersion": {
+            "type": "string",
+            "example": "1.0"
+          },
+          "EventSubscriptionArn": {
+            "type": "string",
+            "example": "arn:aws:sns:us-east-2:123456789012:sns-lambda:21be56ed-a058-49f5-8c98-aedd2564c486"
+          },
+          "EventSource": {
+            "type": "string",
+            "example": "aws:sns"
+          },
+          "Sns": {
+            "type": "object",
+            "required": [
+              "SignatureVersion", "Timestamp", "Signature", "SigningCertUrl", "MessageId",
+              "Message", "MessageAttributes", "Type", "UnsubscribeUrl", "TopicArn"
+            ],
+            "properties": {
+              "SignatureVersion": {
+                "type": "string",
+                "description": "Version of the Amazon SNS signature used.",
+                "example": "1"
+              },
+              "Timestamp": {
+                "type": "string",
+                "description": "The time (GMT) when the notification was published.",
+                "example": "2019-01-02T12:45:07.000Z"
+              },
+              "Signature": {
+                "type": "string",
+                "description": "Base64-encoded SHA1withRSA signature of the Message, MessageId, Subject (if present), Type, Timestamp, and TopicArn values.",
+                "example": "tcc6faL2yUC6dgZdmrwh1Y4cGa/ebXEkAi6RibDsvpi+tE/1+82j...65r=="
+              },
+              "SigningCertUrl": {
+                "type": "string",
+                "description": "The URL to the certificate that was used to sign the message.",
+                "example": "https://sns.us-east-2.amazonaws.com/SimpleNotificationService-ac565b8b1a6c5d002d285f9598aa1d9b.pem"
+              },
+              "MessageId": {
+                "type": "string",
+                "description": "A Universally Unique Identifier, unique for each message published. For a notification that Amazon SNS resends during a retry, the message ID of the original message is used.",
+                "example": "95df01b4-ee98-5cb9-9903-4c221d41eb5e"
+              },
+              "Message": {
+                "type": "string",
+                "description": "The Message value specified when the notification was published to the topic.",
+                "example": "Hello from SNS!"
+              },
+              "MessageAttributes": {
+                "type": "object",
+                "description": "Structured metadata items about the message. See https://docs.aws.amazon.com/sns/latest/dg/sns-message-attributes.html for more information.",
+                "additionalProperties": {
+                  "type": "object",
+                  "properties": {
+                    "Type": {
+                      "type": "string",
+                      "example": "String"
+                    },
+                    "Value": {
+                      "type": "string",
+                      "example": "TestString"
+                    }
+                  }
+                }
+              },
+              "Type": {
+                "type": "string",
+                "description": "The type of message. For a notification, the type is Notification.",
+                "example": "Notification"
+              },
+              "UnsubscribeUrl": {
+                "type": "string",
+                "description": "A URL that you can use to unsubscribe the endpoint from this topic. If you visit this URL, Amazon SNS unsubscribes the endpoint and stops sending notifications to this endpoint.",
+                "example": "https://sns.us-east-2.amazonaws.com/?Action=Unsubscribe&amp;SubscriptionArn=arn:aws:sns:us-east-2:123456789012:test-lambda:21be56ed-a058-49f5-8c98-aedd2564c486"
+              },
+              "TopicArn":{
+                "type": "string",
+                "description": "The Amazon Resource Name (ARN) for the topic that this message was published to.",
+                "example": "arn:aws:sns:us-east-2:123456789012:sns-lambda"
+              },
+              "Subject": {
+                "type": "string",
+                "description": "The Subject parameter specified when the notification was published to the topic.",
+                "example": "TestInvoke"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
