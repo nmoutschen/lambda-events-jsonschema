@@ -4,6 +4,11 @@
   "description": "Events from Amazon API Gateway v1. See https://docs.aws.amazon.com/lambda/latest/dg/services-apigateway.html for more information.",
   "type": "object",
   "properties": {
+    "version": {
+      "type": "string",
+      "enum": ["1.0"],
+      "example": "1.0"
+    },
     "resource": {
       "type": "string",
       "example": "/"
@@ -22,7 +27,8 @@
         "accountId": {
           "type": "string",
           "description": "AWS Account ID where the API Gateway resides.",
-          "example": "12345678912"
+          "example": "123456789012",
+          "pattern": "[0-9]{12}"
         },
         "resourceId": {
           "oneOf": [

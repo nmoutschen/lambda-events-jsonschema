@@ -53,10 +53,13 @@
       "properties": {
         "accountId": {
           "type": "string",
-          "example": "123456789012"
+          "description": "AWS Account ID where the API Gateway resides.",
+          "example": "123456789012",
+          "pattern": "[0-9]{12}"
         },
         "apiId": {
           "type": "string",
+          "description": "Identifier for the API Gateway resource.",
           "example": "api-id"
         },
         "authorizer": {
@@ -142,7 +145,7 @@
           "example": "12/Mar/2020:19:03:58 +0000"
         },
         "timeEpoch": {
-          "type": "number",
+          "type": "integer",
           "example": 1583348638390
         }
       }
