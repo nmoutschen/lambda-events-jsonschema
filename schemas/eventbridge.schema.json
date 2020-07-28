@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "title": "EventBridge Event",
+  "description": "Events From Amazon EventBridge. See https://docs.aws.amazon.com/lambda/latest/dg/services-cloudwatchevents.html for more information. See also https://docs.aws.amazon.com/eventbridge/latest/userguide/event-types.html for AWS events.",
+  "type": "object",
+  "required": [
+    "version", "id", "detail-type", "source", "account", "time", "region", "resources", "detail"
+  ],
+  "properties": {
+    "version": {
+      "type": "string",
+      "description": "Version of the ",
+      "example": "0"
+    },
+    "id": {
+      "type": "string",
+      "description": "Unique identifier for the event",
+      "example": "fe8d3c65-xmpl-c5c3-2c87-81584709a377"
+    },
+    "detail-type": {
+      "type": "string",
+      "description": "Type used to give indication on what fields will be present in the detail.",
+      "example": "RDS DB Instance Event"
+    },
+    "source": {
+      "type": "string",
+      "description": "The source of the event.",
+      "example": "aws.rds"
+    },
+    "account": {
+      "type": "string",
+      "description": "AWS Account ID from which the event originates",
+      "example": "123456789012"
+    },
+    "time": {
+      "type": "string",
+      "description": "The time stamp of the event, per RFC3339.",
+      "example": "2020-04-28T07:20:20Z"
+    },
+    "region": {
+      "type": "string",
+      "description": "Region from which the event originates.",
+      "example": "us-east-2"
+    },
+    "resources": {
+      "type": "array",
+      "description": "Identifiers for the resources related to this event. Amazon Resource Name (ARN) for AWS events.",
+      "items": {
+        "type": "string"
+      }
+    },
+    "detail": {
+      "type": "object",
+      "description": "Free-form object containing details about the event.",
+      "example": {
+        "EventCategories": [
+          "backup"
+        ],
+        "SourceType": "DB_INSTANCE",
+        "SourceArn": "arn:aws:rds:us-east-2:123456789012:db:rdz6xmpliljlb1",
+        "Date": "2020-04-28T07:20:20.112Z",
+        "Message": "Finished DB Instance backup",
+        "SourceIdentifier": "rdz6xmpliljlb1"
+      }
+    }
+  }
+}
