@@ -1,0 +1,258 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "title": "DynamoDB Event",
+  "description": "Amazon DynamoDB Event. See https://docs.aws.amazon.com/lambda/latest/dg/with-ddb.html for more information.",
+
+  "type": "object",
+  "required": ["Records"],
+  "properties": {
+    "Records": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "eventID": {
+            "type": "string",
+            "example": "1"
+          },
+          "eventVersion": {
+            "type": "string",
+            "example": "1.0"
+          },
+          "dynamodb": {
+            "type": "object",
+            "properties": {
+              "Keys": {
+                "type": "object",
+                "additionalProperties": {
+                  "type": "object",
+                  "minProperties": 1,
+                  "maxProperties": 1,
+                  "properties": {
+                    "B": {
+                      "type": "string",
+                      "example": "dGhpcyB0ZXh0IGlzIGJhc2U2NC1lbmNvZGVk"
+                    },
+                    "BOOL": {
+                      "type": "boolean",
+                      "example": true
+                    },
+                    "BS": {
+                      "type": "array",
+                      "example": ["U3Vubnk=", "UmFpbnk=", "U25vd3k="],
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "L": {
+                      "type": "array",
+                      "example": [ {"S": "Cookies"} , {"S": "Coffee"}, {"N": "3.14159"}],
+                      "items": {
+                        "type": "object"
+                      }
+                    },
+                    "M": {
+                      "type": "array",
+                      "example": {"Name": {"S": "Joe"}, "Age": {"N": "35"}},
+                      "items": {
+                        "type": "object"
+                      }
+                    },
+                    "N": {
+                      "type": "string",
+                      "pattern": "[0-9]+(\\.?[0-9]+)",
+                      "example": "123.45"
+                    },
+                    "NS": {
+                      "type": "array",
+                      "example": ["42.2", "-19", "7.5", "3.14"],
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "NULL": {
+                      "type": "boolean",
+                      "example": true
+                    },
+                    "S": {
+                      "type": "string",
+                      "example": "Hello"
+                    },
+                    "SS": {
+                      "type": "array",
+                      "example": ["Giraffe", "Hippo" ,"Zebra"],
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              },
+              "OldImage": {
+                "type": "object",
+                "additionalProperties": {
+                  "type": "object",
+                  "minProperties": 1,
+                  "maxProperties": 1,
+                  "properties": {
+                    "B": {
+                      "type": "string",
+                      "example": "dGhpcyB0ZXh0IGlzIGJhc2U2NC1lbmNvZGVk"
+                    },
+                    "BOOL": {
+                      "type": "boolean",
+                      "example": true
+                    },
+                    "BS": {
+                      "type": "array",
+                      "example": ["U3Vubnk=", "UmFpbnk=", "U25vd3k="],
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "L": {
+                      "type": "array",
+                      "example": [ {"S": "Cookies"} , {"S": "Coffee"}, {"N": "3.14159"}],
+                      "items": {
+                        "type": "object"
+                      }
+                    },
+                    "M": {
+                      "type": "array",
+                      "example": {"Name": {"S": "Joe"}, "Age": {"N": "35"}},
+                      "items": {
+                        "type": "object"
+                      }
+                    },
+                    "N": {
+                      "type": "string",
+                      "pattern": "[0-9]+(\\.?[0-9]+)",
+                      "example": "123.45"
+                    },
+                    "NS": {
+                      "type": "array",
+                      "example": ["42.2", "-19", "7.5", "3.14"],
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "NULL": {
+                      "type": "boolean",
+                      "example": true
+                    },
+                    "S": {
+                      "type": "string",
+                      "example": "Hello"
+                    },
+                    "SS": {
+                      "type": "array",
+                      "example": ["Giraffe", "Hippo" ,"Zebra"],
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              },
+              "NewImage": {
+                "type": "object",
+                "additionalProperties": {
+                  "type": "object",
+                  "minProperties": 1,
+                  "maxProperties": 1,
+                  "properties": {
+                    "B": {
+                      "type": "string",
+                      "example": "dGhpcyB0ZXh0IGlzIGJhc2U2NC1lbmNvZGVk"
+                    },
+                    "BOOL": {
+                      "type": "boolean",
+                      "example": true
+                    },
+                    "BS": {
+                      "type": "array",
+                      "example": ["U3Vubnk=", "UmFpbnk=", "U25vd3k="],
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "L": {
+                      "type": "array",
+                      "example": [ {"S": "Cookies"} , {"S": "Coffee"}, {"N": "3.14159"}],
+                      "items": {
+                        "type": "object"
+                      }
+                    },
+                    "M": {
+                      "type": "array",
+                      "example": {"Name": {"S": "Joe"}, "Age": {"N": "35"}},
+                      "items": {
+                        "type": "object"
+                      }
+                    },
+                    "N": {
+                      "type": "string",
+                      "pattern": "[0-9]+(\\.?[0-9]+)",
+                      "example": "123.45"
+                    },
+                    "NS": {
+                      "type": "array",
+                      "example": ["42.2", "-19", "7.5", "3.14"],
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "NULL": {
+                      "type": "boolean",
+                      "example": true
+                    },
+                    "S": {
+                      "type": "string",
+                      "example": "Hello"
+                    },
+                    "SS": {
+                      "type": "array",
+                      "example": ["Giraffe", "Hippo" ,"Zebra"],
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              },
+              "StreamViewType": {
+                "type": "string",
+                "example": "NEW_AND_OLD_IMAGES"
+              },
+              "SequenceNumber": {
+                "type": "string",
+                "example": "111"
+              },
+              "SizeBytes": {
+                "type": "integer",
+                "example": 26
+              }
+            }
+          },
+          "awsRegion": {
+            "type": "string",
+            "example": "us-west-2"
+          },
+          "eventName": {
+            "type": "string",
+            "example": "INSERT",
+            "enum": ["DELETE", "INSERT", "MODIFY"]
+          },
+          "eventSourceARN": {
+            "type": "string",
+            "example": "arn:aws:dynamodb:us-east-2:123456789012:table/my-table/stream/2019-06-10T19:26:16.525"
+          },
+          "eventSource": {
+            "type": "string",
+            "example": "aws:dynamodb"
+          }
+        }
+      }
+    }
+  }
+}
