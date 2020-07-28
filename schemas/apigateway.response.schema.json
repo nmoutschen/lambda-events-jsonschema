@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "title": "API Gateway Response (v1)",
+  "description": "Response for Amazon API Gateway v1 invocations. See https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-develop-integrations-lambda.html#http-api-develop-integrations-lambda.response for more details.",
+  "type": "object",
+  "required": ["statusCode", "body"],
+  "properties": {
+    "statusCode": {
+      "type": "integer",
+      "example": "200"
+    },
+    "body": {
+      "type": "string",
+      "example": "Hello from Lambda."
+    },
+    "isBase64Encoded": {
+      "type": "boolean",
+      "default": false,
+      "example": false
+    },
+    "headers": {
+      "type": "object",
+      "example": {
+        "headerName": "headerValue"
+      },
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "multiValueHeaders": {
+      "type": "object",
+      "example": {
+        "headerName": ["headerValue", "headerValue2"]
+      },
+      "additionalProperties": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
