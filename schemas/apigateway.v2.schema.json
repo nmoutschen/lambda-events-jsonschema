@@ -1,0 +1,178 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "title": "API Gateway Event (v2)",
+  "description": "Events from Amazon API Gateway v2. See https://docs.aws.amazon.com/lambda/latest/dg/services-apigateway.html for more information.",
+
+  "properties": {
+    "version": {
+      "type": "string",
+      "enum": ["2.0"],
+      "example": "2.0"
+    },
+    "routeKey": {
+      "type": "string",
+      "example": "ANY /nodejs-apig-function-1G3XMPLZXVXYI"
+    },
+    "rawPath": {
+      "type": "string",
+      "example": "ANY /nodejs-apig-function-1G3XMPLZXVXYI"
+    },
+    "rawQueryString": {
+      "type": "string",
+      "example": "parameter1=value1&parameter1=value2&parameter2=value"
+    },
+    "cookies": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "example": "s_fid=7AABXMPL1AFD9BBF-0643XMPL09956DE2"
+      }
+    },
+    "headers": {
+      "type": "object",
+      "example": {
+        "Header1": "value1",
+        "Header2": "value1,value2"
+      },
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "queryStringParameters": {
+      "type": "object",
+      "example": {
+        "parameter1": "value1,value2",
+        "parameter2": "value"
+      },
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "requestContext": {
+      "type": "object",
+      "properties": {
+        "accountId": {
+          "type": "string",
+          "example": "123456789012"
+        },
+        "apiId": {
+          "type": "string",
+          "example": "api-id"
+        },
+        "authorizer": {
+          "type": "object",
+          "properties": {
+            "jwt": {
+              "type": "object",
+              "properties": {
+                "claims": {
+                  "type": "object",
+                  "example": {
+                    "claim1": "value1",
+                    "claim2": "value2"
+                  },
+                  "additionalProperties": {
+                    "type": "string"
+                  }
+                },
+                "scopes": {
+                  "type": "array",
+                  "examples": [
+                    "scope1",
+                    "scope2"
+                  ],
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "domainName": {
+          "type": "string",
+          "example": "id.execute-api.us-east-1.amazonaws.com"
+        },
+        "domainPrefix": {
+          "type": "string",
+          "example": "id"
+        },
+        "http": {
+          "type": "object",
+          "properties": {
+            "method": {
+              "type": "string",
+              "example": "POST"
+            },
+            "path": {
+              "type": "string",
+              "example": "/my/path"
+            },
+            "protocol": {
+              "type": "string",
+              "example": "HTTP/1.1"
+            },
+            "sourceIp": {
+              "type": "string",
+              "description": "The source IP address of the TCP connection making the request to API Gateway. You should not trust this value if there is any chance that the X-Forwarded-For header could be forged.",
+              "example": "192.168.196.186"
+            },
+            "userAgent": {
+              "type": "string",
+              "description": "HTTP User Agent, as specified by the User-Agent header.",
+              "example": "PostmanRuntime/2.4.5"
+            }
+          }
+        },
+        "requestId": {
+          "type": "string",
+          "description": "Unique identifier for the API Gateway request.",
+          "example": "deef4878-7910-11e6-8f14-25afc3e9ae33"
+        },
+        "routeKey": {
+          "type": "string",
+          "example": "ANY /nodejs-apig-function-1G3XMPLZXVXYI"
+        },
+        "stage": { 
+          "type": "string",
+          "example": "$default"
+        },
+        "time": {
+          "type": "string",
+          "example": "12/Mar/2020:19:03:58 +0000"
+        },
+        "timeEpoch": {
+          "type": "number",
+          "example": 1583348638390
+        }
+      }
+    },
+    "body": {
+      "type": "string",
+      "example": "Hello from Lambda"
+    },
+    "pathParameters": {
+      "type": "object",
+      "example": {
+        "parameter1": "value1"
+      },
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "isBase64Encoded": {
+      "type": "boolean",
+      "example": false
+    },
+    "stageVariables": {
+      "type": "object",
+      "example": {
+        "stageVariable1": "value1",
+        "stageVariable2": "value2"
+      },
+      "additionalProperties": {
+        "type": "string"
+      }
+    }
+  }
+}

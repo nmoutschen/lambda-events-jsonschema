@@ -25,9 +25,16 @@
           "example": "12345678912"
         },
         "resourceId": {
-          "type": "string",
-          "description": "Identifier for the API Gateway resource.",
-          "example": "roq9wj"
+          "oneOf": [
+            {
+            "type": "string",
+            "description": "Identifier for the API Gateway resource.",
+            "example": "roq9wj"
+            },
+            {
+              "type": "null"
+            }
+          ]
         },
         "stage": {
           "type": "string",
@@ -150,24 +157,48 @@
               "type": "object",
               "properties": {
                 "claims": {
-                  "type": "object",
-                  "description": "A property of the claims returned from the Amazon Cognito user pool after the method caller is successfully authenticated.",
-                  "example": {
-                    "sub": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
-                    "aud": "xxxxxxxxxxxxexample",
-                    "email_verified": true,
-                    "token_use": "id",
-                    "auth_time": 1500009400,
-                    "iss": "https://cognito-idp.us-east-1.amazonaws.com/us-east-1_example",
-                    "cognito:username": "janedoe",
-                    "exp": 1500013000,
-                    "given_name": "Jane",
-                    "iat": 1500009400,
-                    "email": "janedoe@example.com"
-                  },
-                  "additionalProperties": {
-                    "type": "string"
-                  }
+                  "oneOf": [
+                    {
+                      "type": "object",
+                      "description": "A property of the claims returned from the Amazon Cognito user pool after the method caller is successfully authenticated.",
+                      "example": {
+                        "sub": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+                        "aud": "xxxxxxxxxxxxexample",
+                        "email_verified": true,
+                        "token_use": "id",
+                        "auth_time": 1500009400,
+                        "iss": "https://cognito-idp.us-east-1.amazonaws.com/us-east-1_example",
+                        "cognito:username": "janedoe",
+                        "exp": 1500013000,
+                        "given_name": "Jane",
+                        "iat": 1500009400,
+                        "email": "janedoe@example.com"
+                      },
+                      "additionalProperties": {
+                        "type": "string"
+                      }
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                },
+                "scopes": {
+                  "oneOf": [
+                    {
+                      "type": "array",
+                      "examples": [
+                        "scope1",
+                        "scope2"
+                      ],
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
                 }
               }
             },
@@ -178,10 +209,6 @@
                 "key": "value",
                 "numKey": "1",
                 "boolKey": "true"
-              },
-              "properties": {
-                "type": "string",
-                "description": "The principal user identification associated with the token sent by the client and returned from an API Gateway Lambda authorizer (formerly known as a custom authorizer)."
               },
               "additionalProperties": {
                 "type": "string"
