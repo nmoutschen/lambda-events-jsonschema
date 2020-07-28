@@ -1,0 +1,288 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "title": "API Gateway Event (v1)",
+  "description": "Events from Amazon API Gateway v1. See https://docs.aws.amazon.com/lambda/latest/dg/services-apigateway.html for more information.",
+  "type": "object",
+  "properties": {
+    "resource": {
+      "type": "string",
+      "example": "/"
+    },
+    "path": {
+      "type": "string",
+      "example": "/"
+    },
+    "httpMethod": {
+      "type": "string",
+      "example": "GET"
+    },
+    "requestContext": {
+      "type": "object",
+      "properties": {
+        "accountId": {
+          "type": "string",
+          "description": "AWS Account ID where the API Gateway resides.",
+          "example": "12345678912"
+        },
+        "resourceId": {
+          "type": "string",
+          "description": "Identifier for the API Gateway resource.",
+          "example": "roq9wj"
+        },
+        "stage": {
+          "type": "string",
+          "description": "Name of the API Gateway stage.",
+          "example": "testStage"
+        },
+        "requestId": {
+          "type": "string",
+          "description": "Unique identifier for the API Gateway request.",
+          "example": "deef4878-7910-11e6-8f14-25afc3e9ae33"
+        },
+        "identity": {
+          "type": "object",
+          "properties": {
+            "cognitoIdentityPoolId": {
+              "description": "Cognito Identity Pool ID when using IAM credentials from a Cognito Identity Pool.",
+              "oneOf": [
+                { "type": "string" },
+                { "type": "null" }
+              ]
+            },
+            "accountId": {
+              "description": "AWS Account ID when using IAM credentials",
+              "oneOf": [
+                {
+                  "type": "string",
+                  "example": "123456789012"
+                },
+                { "type": "null" }
+              ]
+            },
+            "cognitoIdentityId": {
+              "description": "Cognito Identity ID when using IAM credentials",
+              "oneOf": [
+                { "type": "string" },
+                { "type": "null" }
+              ]
+            },
+            "caller": {
+              "description": "Unique identifier for the IAM caller. See https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html#identifiers-unique-ids for more information.",
+              "oneOf": [
+                {
+                  "type": "string",
+                  "example": "AIDAJ........4HCKVJZG"
+                },
+                { "type": "null" }
+              ]
+            },
+            "apiKey": {
+              "description": "API Key used to call the API Gateway. See https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-api-usage-plans.html for more information.",
+              "oneOf": [
+                { "type": "string" },
+                { "type": "null" }
+              ]
+            },
+            "sourceIp": {
+              "description": "The source IP address of the TCP connection making the request to API Gateway. You should not trust this value if there is any chance that the X-Forwarded-For header could be forged.",
+              "type": "string",
+              "example": "192.168.196.186"
+            },
+            "cognitoAuthenticationType": {
+              "description": "The Amazon Cognito authentication type of the caller making the request. Available only if the request was signed with Amazon Cognito credentials.",
+              "oneOf": [
+                { "type": "string" },
+                { "type": "null" }
+              ]
+            },
+            "cognitoAuthenticationProvider": {
+              "description": "The Amazon Cognito authentication provider used by the caller making the request. Available only if the request was signed with Amazon Cognito credentials.",
+              "oneOf": [
+                { "type": "string" },
+                { "type": "null" }
+              ]
+            },
+            "userArn": {
+              "description": "Amazon Resource Name (ARN) for the caller when using IAM authorization.",
+              "oneOf": [
+                {
+                  "type": "string",
+                  "example": "arn:aws:iam::123456789012:user/alice"
+                },
+                { "type": "null" }
+              ]
+            },
+            "userAgent": {
+              "type": "string",
+              "description": "HTTP User Agent, as specified by the User-Agent header.",
+              "example": "PostmanRuntime/2.4.5"
+            },
+            "user": {
+              "description": "Unique identifier for the IAM caller. See https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html#identifiers-unique-ids for more information.",
+              "oneOf": [
+                {
+                  "type": "string",
+                  "example": "AIDAJ........4HCKVJZG"
+                },
+                { "type": "null" }
+              ]
+            }
+          }
+        },
+        "resourcePath": {
+          "type": "string",
+          "description": "Path pattern that matches the resource invoked.",
+          "example": "/{proxy+}"
+        },
+        "httpMethod": {
+          "type": "string",
+          "description": "Name of the HTTP method used to call the API.",
+          "example": "POST"
+        },
+        "apiId": {
+          "type": "string",
+          "description": "Identifier for the API Gateway.",
+          "example": "gy415nuibc"
+        },
+        "authorizer": {
+          "oneOf": [
+            {
+              "type": "object",
+              "properties": {
+                "claims": {
+                  "type": "object",
+                  "description": "A property of the claims returned from the Amazon Cognito user pool after the method caller is successfully authenticated.",
+                  "example": {
+                    "sub": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+                    "aud": "xxxxxxxxxxxxexample",
+                    "email_verified": true,
+                    "token_use": "id",
+                    "auth_time": 1500009400,
+                    "iss": "https://cognito-idp.us-east-1.amazonaws.com/us-east-1_example",
+                    "cognito:username": "janedoe",
+                    "exp": 1500013000,
+                    "given_name": "Jane",
+                    "iat": 1500009400,
+                    "email": "janedoe@example.com"
+                  },
+                  "additionalProperties": {
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            {
+              "type": "object",
+              "description": "The stringified value of the specified key-value pair of the context map returned from an API Gateway Lambda authorizer function.",
+              "example": {
+                "key": "value",
+                "numKey": "1",
+                "boolKey": "true"
+              },
+              "properties": {
+                "type": "string",
+                "description": "The principal user identification associated with the token sent by the client and returned from an API Gateway Lambda authorizer (formerly known as a custom authorizer)."
+              },
+              "additionalProperties": {
+                "type": "string"
+              }
+            }
+          ]
+        }
+      }
+    },
+    "headers": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "multiValueHeaders": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "queryStringParameters": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "multiValueQueryStringParameters": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "pathParameters": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "stageVariables": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "body": {
+      "oneOf": [
+        { "type": "string" },
+        { "type": "null" }
+      ]
+    },
+    "isBase64Encoded": {
+      "type": "boolean"
+    }
+  }
+}
